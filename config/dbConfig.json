@@ -1,0 +1,13 @@
+{
+  "user": "user",
+  "password": "password",
+  "server": "server",
+  "port": 0,
+  "database": "db",
+  "options": {
+    "encrypt": false
+  },
+  "pool": {
+    "acquireTimeoutMillis": 15000
+  }
+}
