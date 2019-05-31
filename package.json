@@ -1,4 +1,22 @@
 {
+  "name": "website-patrol",
+  "version": "0.1.0",
+  "description": "Patroler for website",
+  "main": "index.js",
+  "author": {
+    "name": "Ahn Young Seon",
+    "email": "ys.ahn@outlook.com",
+    "url": "https://lovemewithoutall.github.io"
+  },
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoveMeWithoutAll/website-patrol.git"
+  },
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
     "es6-promise": "^4.2.6",
     "fetch": "^1.1.0",
