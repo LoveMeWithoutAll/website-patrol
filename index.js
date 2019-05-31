@@ -1,33 +1,28 @@
 const promiseFinally = require("promise.prototype.finally")
 promiseFinally.shim()
 
-const fetchUrl = require("fetch").fetchUrl;
 const dbService = require("./service/db")
+const patrol = require("./service/patrol")
 const { onStart, onDBConncetion, onServerError } = require("./service/log")
 
-const patrol = () => {
-  fetchUrl("http://cms.inha.ac.kr/ctlt/board_pworkshop/list.aspx", function(error, meta, body){
-    if (error) {
-      error.toString();
-      return;
-    }
-      console.log(body.toString());
-  });
 
-  fetchUrl("http://cms.inha.ac.kr/ctlt/board_sworkshop/list.aspx", function(error, meta, body){
-    if (error) {
-      error.toString();
-      return;
-    }
-      console.log(body.toString());
-  });
+const goPatrol = () => {
+  try {
+    patrol.patrol();
+  } catch (error) {
+    onServerError(error)
+  } finally {
+    setTimeout(() => {
+      goPatrol ()
+    }, 1000 *60 * 10)
+  }
 }
 
 onStart()
 dbService.getConnectionPool()
 	.then((connectionPool) => {
     onDBConncetion(connectionPool)
-    patrol()
+    goPatrol()
 	}, (error) => {
 		onServerError(error)
 		process.exit()
